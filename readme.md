@@ -58,3 +58,10 @@ Deleta uma pizza pelo ID é isso
 - Fazer views
 - Implementar GET por ID
 - Implementar PUT para alterar um registro
+- Implementar banco de dados persistente (mySql / MariaDB)
+  
+# Tecnologias utilizadas
+- Spring Web
+- Spring Data JPA
+- Lombok
+- H2 Database
