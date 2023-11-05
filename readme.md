@@ -61,7 +61,7 @@ Deleta uma pizza pelo ID é isso
 - Implementar banco de dados persistente (mySql / MariaDB)
   
 # Tecnologias utilizadas
-- Spring Web
+- Spring Webg
 - Spring Data JPA
 - Lombok
 - H2 Database

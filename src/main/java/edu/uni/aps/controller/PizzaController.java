@@ -31,41 +31,40 @@ public class PizzaController {
         return (List<Pizza>) pizzaRepo.findAll();
     }
 
-    /**
-     * Recebe um JSON com sabor, descricao e valor e insere no banco de dados
-     * {
-     * "sabor" : "",
-     * "descricao" : "",
-     * "valor" : ""
-     * }
-     * 
-     */
     @PostMapping(path = "/pizza", consumes = "application/json")
-    public void insertNewEntry(@RequestBody Pizza p) {
+    public ResponseEntity<Pizza> insertNewEntry(@RequestBody Pizza p) {
         pizzaRepo.save(p);
+        return ResponseEntity.ok(p);
     }
 
-    /*
-     * Deleta uma pizza pelo seu ID, caso o ID não existe joga uma exceção
-     */
     @DeleteMapping("/pizza/{id}")
-    public void deleteEntry(@PathVariable Long id) throws NotFoundException {
+    public ResponseEntity<String> deleteEntry(@PathVariable Long id) {
         if (pizzaRepo.existsById(id)) {
             pizzaRepo.deleteById(id);
             System.out.println("Deletado com sucesso");
+            return ResponseEntity.status(200)
+                    .body("Pizza com ID: " + id + " deletada com sucesso");
         } else {
-            throw new NotFoundException();
+            return ResponseEntity.status(404)
+                    .body("ID não encontrado");
         }
     }
 
     @PutMapping("/pizza/up/{id}")
-    public ResponseEntity<Pizza> updateEntry(@PathVariable long id, @RequestBody Pizza pizzaPayload) throws NotFoundException{
-        
+    public ResponseEntity<Pizza> updateEntry(@PathVariable long id, @RequestBody Pizza pizzaPayload)
+            throws NotFoundException {
+
         Pizza pizzaAtualizada = pizzaRepo.findById(id).orElseThrow(() -> new NotFoundException());
 
-        if(pizzaPayload.sabor != null) { pizzaAtualizada.setSabor(pizzaPayload.sabor); }
-        if(pizzaPayload.descricao != null) { pizzaAtualizada.setDescricao(pizzaPayload.descricao); }
-        if(pizzaPayload.valor != 0) { pizzaAtualizada.setValor(pizzaPayload.valor); }
+        if (pizzaPayload.sabor != null) {
+            pizzaAtualizada.setSabor(pizzaPayload.sabor);
+        }
+        if (pizzaPayload.descricao != null) {
+            pizzaAtualizada.setDescricao(pizzaPayload.descricao);
+        }
+        if (pizzaPayload.valor != 0) {
+            pizzaAtualizada.setValor(pizzaPayload.valor);
+        }
 
         pizzaRepo.save(pizzaAtualizada);
         return ResponseEntity.ok(pizzaAtualizada);
