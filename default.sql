@@ -1,2 +1,0 @@
-INSERT INTO TB_PIZZAS (SABOR_PIZZA, DESC_PIZZA, PREC_UNIT) VALUES ('Margeritta', 'Molho de tomate, mussarela, manjericão e parmesão. Um sabor clássico e muito querido. ', 35.2);
-INSERT INTO TB_PIZZAS (SABOR_PIZZA, DESC_PIZZA, PREC_UNIT) VALUES ('Mussarela', 'Molho de tomate, queijo tipo mussarela, azeitonas pretas e orégano e massa com fermentação natural', 30.0);
